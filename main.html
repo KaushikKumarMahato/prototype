@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVerse - Ultimate Gaming Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .font-gaming { font-family: 'Orbitron', monospace; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        .login-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="circuit" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(99,102,241,0.3)"/><path d="M0 10h20M10 0v20" stroke="rgba(99,102,241,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23circuit)"/></svg>');
+            opacity: 0.4;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .game-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(145deg, #1f2937, #374151);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.8); }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .login-form {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        
+        .input-glow:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+            border-color: rgb(99, 102, 241);
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+        
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-body">
+    <!-- Login Page -->
+    <div id="loginPage" class="login-bg min-h-screen flex items-center justify-center relative">
+        <div class="max-w-md w-full mx-4 relative z-10">
+            <div class="login-form rounded-2xl p-8 slide-up">
+                <!-- Logo -->
+                <div class="text-center mb-8">
+                    <div class="text-4xl font-gaming font-black text-indigo-400 mb-2">EduVerse</div>
+                    <p class="text-gray-400">Where learning meets gaming excellence</p>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="loginForm" class="space-y-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username or Email</label>
+                        <input type="text" id="username" name="username" required
+                               class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none input-glow transition-all"
+                               placeholder="Enter your username">
+                    </div>
+                    
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                        <input type="password" id="password" name="password" required
+                               class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none input-glow transition-all"
+                               placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="w-4 h-4 text-indigo-600 bg-gray-800 border-gray-600 rounded focus:ring-indigo-500">
+                            <span class="ml-2 text-sm text-gray-400">Remember me</span>
+                        </label>
+                        <a href="#" class="text-sm text-indigo-400 hover:text-indigo-300 transition-colors">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 pulse-glow">
+                        📚 Enter EduVerse
+                    </button>
+                </form>
+                
+                <!-- Social Login -->
+                <div class="mt-6">
+                    <div class="relative">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-600"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-2 bg-gray-700 text-gray-400">Or continue with</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <button class="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg bg-gray-800 text-sm font-medium text-gray-300 hover:bg-gray-700 transition-colors">
+                            <span class="mr-2">🎮</span>
+                            Steam
+                        </button>
+                        <button class="w-full inline-flex justify-center py-2 px-4 border border-gray-600 rounded-lg bg-gray-800 text-sm font-medium text-gray-300 hover:bg-gray-700 transition-colors">
+                            <span class="mr-2">💬</span>
+                            Discord
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sign Up Link -->
+                <div class="mt-6 text-center">
+                    <p class="text-gray-400">
+                        New to EduVerse? 
+                        <a href="#" class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Create an account</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Floating Gaming Elements -->
+            <div class="absolute top-10 left-10 text-4xl floating opacity-30">🎯</div>
+            <div class="absolute top-20 right-10 text-3xl floating opacity-20" style="animation-delay: 1s;">⚡</div>
+            <div class="absolute bottom-20 left-20 text-5xl floating opacity-25" style="animation-delay: 2s;">🏆</div>
+            <div class="absolute bottom-10 right-20 text-3xl floating opacity-30" style="animation-delay: 0.5s;">🎮</div>
+        </div>
+    </div>
+
+    <!-- Main Website (Initially Hidden) -->
+    <div id="mainWebsite" class="hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-gray-900/95 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-xl sm:text-2xl font-gaming font-bold text-indigo-400">EduVerse</div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-gray-300 hover:text-white p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="#courses" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Courses</a>
+                        <a href="#challenges" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Challenges</a>
+                        <a href="#community" class="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Community</a>
+                    </div>
+                </div>
+                
+                <!-- Desktop user menu -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="text-sm text-gray-300">Welcome back, <span id="userDisplay" class="text-indigo-400 font-semibold">Gamer</span>!</div>
+                    <button id="profileBtn" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors pulse-glow">Profile</button>
+                    <button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">Logout</button>
+                </div>
+                
+                <!-- Mobile user menu -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <span id="userDisplayMobile" class="text-indigo-400 font-semibold text-sm">Gamer</span>
+                    <button class="bg-red-600 hover:bg-red-700 px-3 py-1 rounded text-xs font-medium transition-colors">Logout</button>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobileMenu" class="md:hidden hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1 bg-gray-900 border-t border-gray-800">
+                    <a href="#home" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium transition-colors">Home</a>
+                    <a href="#courses" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium transition-colors">Courses</a>
+                    <a href="#challenges" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium transition-colors">Challenges</a>
+                    <a href="#community" class="text-gray-300 hover:text-white block px-3 py-2 text-base font-medium transition-colors">Community</a>
+                    <button id="profileBtnMobile" class="w-full text-left bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-lg text-base font-medium transition-colors mt-2">Profile</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="floating">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-gaming font-black mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent leading-tight">
+                    LEVEL UP YOUR LEARNING
+                </h1>
+            </div>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto px-4">
+                Transform education through gamification. Learn, compete, and master new skills in our interactive learning universe.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
+                <button class="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold transition-all transform hover:scale-105 pulse-glow">
+                    📚 Start Learning
+                </button>
+                <button class="w-full sm:w-auto border-2 border-white/30 hover:border-white/60 px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg font-semibold transition-all hover:bg-white/10">
+                    🎥 Watch Demo
+                </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 sm:gap-8 mt-12 sm:mt-16 max-w-2xl mx-auto px-4">
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-gaming font-bold text-purple-400">1.2M+</div>
+                    <div class="text-xs sm:text-sm md:text-base text-gray-300">Active Learners</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-gaming font-bold text-indigo-400">500+</div>
+                    <div class="text-xs sm:text-sm md:text-base text-gray-300">Courses Available</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-gaming font-bold text-green-400">98%</div>
+                    <div class="text-xs sm:text-sm md:text-base text-gray-300">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section id="courses" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-gaming font-bold mb-4">Featured Courses</h2>
+                <p class="text-lg sm:text-xl text-gray-400 px-4">Master new skills through interactive learning experiences</p>
+            </div>
+            
+            <!-- Subject Selection Menu -->
+            <div class="mb-12">
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button class="subject-filter active bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="all">
+                        📚 All Subjects
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="mathematics">
+                        🧮 Mathematics
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="science">
+                        🔬 Science
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="technology">
+                        💻 Technology
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="history">
+                        🏛️ History
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="languages">
+                        🗣️ Languages
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="arts">
+                        🎨 Arts
+                    </button>
+                    <button class="subject-filter bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-full font-semibold transition-all transform hover:scale-105" data-subject="business">
+                        💼 Business
+                    </button>
+                </div>
+            </div>
+            
+            <div id="courseGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Mathematics Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="mathematics">
+                    <div class="w-full h-48 bg-gradient-to-br from-red-500 to-orange-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🧮</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Advanced Calculus Quest</h3>
+                    <p class="text-gray-400 mb-4">Master calculus through interactive problem-solving adventures. Perfect for college-level mathematics.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-blue-600 px-2 py-1 rounded">College Level</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="mathematics">
+                    <div class="w-full h-48 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">📊</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Statistics & Probability</h3>
+                    <p class="text-gray-400 mb-4">Analyze data and predict outcomes through gamified statistical challenges and real-world applications.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-yellow-400 font-semibold">Premium</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">High School+</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- Science Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="science">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🔬</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Chemistry Lab Simulator</h3>
+                    <p class="text-gray-400 mb-4">Conduct virtual experiments safely! Mix compounds, observe reactions, and master chemical principles.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-blue-600 px-2 py-1 rounded">College Level</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="science">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🧬</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Biology Adventure</h3>
+                    <p class="text-gray-400 mb-4">Explore the microscopic world! Journey through cells, DNA, and ecosystems in this interactive biology course.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">High School+</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- Technology Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="technology">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">💻</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Python Programming Bootcamp</h3>
+                    <p class="text-gray-400 mb-4">Learn programming through interactive challenges. Build projects, earn badges, and become a coding master.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-yellow-400 font-semibold">Premium</span>
+                        <span class="text-xs bg-blue-600 px-2 py-1 rounded">College Level</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="technology">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🌐</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Web Development Quest</h3>
+                    <p class="text-gray-400 mb-4">Build stunning websites from scratch! Master HTML, CSS, and JavaScript through hands-on projects.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">High School+</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- History Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="history">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🏛️</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Ancient Civilizations</h3>
+                    <p class="text-gray-400 mb-4">Travel through time and explore ancient Rome, Egypt, and Greece through immersive historical simulations.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">High School+</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="history">
+                    <div class="w-full h-48 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🌍</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">World War Chronicles</h3>
+                    <p class="text-gray-400 mb-4">Understand major historical events through interactive timelines and decision-based scenarios.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-yellow-400 font-semibold">Premium</span>
+                        <span class="text-xs bg-blue-600 px-2 py-1 rounded">College Level</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- Languages Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="languages">
+                    <div class="w-full h-48 bg-gradient-to-br from-rose-500 to-pink-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🗣️</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Spanish Immersion</h3>
+                    <p class="text-gray-400 mb-4">Learn Spanish through interactive conversations, cultural scenarios, and gamified vocabulary challenges.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-green-400 font-semibold">Free Course</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">All Levels</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- Arts Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="arts">
+                    <div class="w-full h-48 bg-gradient-to-br from-violet-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">🎨</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Digital Art Mastery</h3>
+                    <p class="text-gray-400 mb-4">Create stunning digital artwork! Learn design principles, color theory, and digital painting techniques.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-yellow-400 font-semibold">Premium</span>
+                        <span class="text-xs bg-green-600 px-2 py-1 rounded">High School+</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+
+                <!-- Business Courses -->
+                <div class="course-card game-card rounded-xl p-6 border border-gray-700" data-subject="business">
+                    <div class="w-full h-48 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center">
+                        <div class="text-6xl">💼</div>
+                    </div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Entrepreneurship Simulator</h3>
+                    <p class="text-gray-400 mb-4">Build your virtual business empire! Learn marketing, finance, and management through realistic simulations.</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-yellow-400 font-semibold">Premium</span>
+                        <span class="text-xs bg-blue-600 px-2 py-1 rounded">College Level</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm transition-colors">Start Learning</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Challenges -->
+    <section id="challenges" class="py-12 sm:py-16 lg:py-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-gaming font-bold mb-4">College Learning Challenges</h2>
+                <p class="text-lg sm:text-xl text-gray-400 px-4">Test your knowledge and compete with college students nationwide</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-xl p-8 border border-purple-500/30">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-gaming font-bold">College Championship</h3>
+                        <span class="bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">LIVE</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">The ultimate academic competition featuring the brightest college students from across the nation.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <div class="text-sm text-gray-400">Points Pool</div>
+                            <div class="text-xl font-bold text-green-400">50,000 XP</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-400">Participants</div>
+                            <div class="text-xl font-bold text-blue-400">2,500+ Students</div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 py-3 rounded-lg font-semibold transition-all">
+                        Watch Live
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-900/50 to-teal-900/50 rounded-xl p-8 border border-green-500/30">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-gaming font-bold">Campus Quiz League</h3>
+                        <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">OPEN</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">Perfect for college students to test their knowledge and earn achievement badges.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <div class="text-sm text-gray-400">Rewards</div>
+                            <div class="text-xl font-bold text-green-400">5,000 XP</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-400">Registration</div>
+                            <div class="text-xl font-bold text-blue-400">Open</div>
+                        </div>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 py-3 rounded-lg font-semibold transition-all">
+                        Join Challenge
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community -->
+    <section id="community" class="py-12 sm:py-16 lg:py-20 bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-gaming font-bold mb-4">Join Our Learning Community</h2>
+                <p class="text-lg sm:text-xl text-gray-400 px-4">Connect with fellow learners and educators worldwide</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-8 bg-gray-900 rounded-xl border border-gray-700 hover:border-indigo-500 transition-colors">
+                    <div class="text-5xl mb-4">💬</div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Study Groups</h3>
+                    <p class="text-gray-400 mb-4">Join study groups, find learning partners, and collaborate on projects.</p>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-lg transition-colors">Join Groups</button>
+                </div>
+                
+                <div class="text-center p-8 bg-gray-900 rounded-xl border border-gray-700 hover:border-purple-500 transition-colors">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Study Buddy Matching</h3>
+                    <p class="text-gray-400 mb-4">Get matched with compatible study partners based on your learning style and goals.</p>
+                    <button class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-lg transition-colors">Find Study Buddy</button>
+                </div>
+                
+                <div class="text-center p-8 bg-gray-900 rounded-xl border border-gray-700 hover:border-blue-500 transition-colors">
+                    <div class="text-5xl mb-4">📚</div>
+                    <h3 class="text-xl font-gaming font-bold mb-2">Knowledge Hub</h3>
+                    <p class="text-gray-400 mb-4">Access forums, share resources, and get help from the community.</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg transition-colors">Explore Hub</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Page (Initially Hidden) -->
+    <div id="profilePage" class="hidden min-h-screen bg-gray-900 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Profile Header -->
+            <div class="bg-gradient-to-r from-purple-900/50 to-indigo-900/50 rounded-2xl p-8 mb-8 border border-purple-500/30">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="w-32 h-32 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-6xl">
+                        🎓
+                    </div>
+                    <div class="text-center md:text-left flex-1">
+                        <h1 class="text-3xl font-gaming font-bold mb-2" id="profileUsername">Learning Champion</h1>
+                        <p class="text-gray-300 mb-4">Joined EduVerse • Active Learner</p>
+                        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <div class="bg-gray-800 px-4 py-2 rounded-lg">
+                                <div class="text-sm text-gray-400">Current Level</div>
+                                <div class="text-xl font-bold text-purple-400" id="currentLevel">15</div>
+                            </div>
+                            <div class="bg-gray-800 px-4 py-2 rounded-lg">
+                                <div class="text-sm text-gray-400">Total XP</div>
+                                <div class="text-xl font-bold text-green-400" id="totalXP">12,450</div>
+                            </div>
+                            <div class="bg-gray-800 px-4 py-2 rounded-lg">
+                                <div class="text-sm text-gray-400">Courses Completed</div>
+                                <div class="text-xl font-bold text-blue-400" id="coursesCompleted">8</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Level Progress Bar -->
+                <div class="mt-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm text-gray-400">Progress to Level 16</span>
+                        <span class="text-sm text-purple-400">750 / 1000 XP</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-3 rounded-full" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column: Course Progress & Stats -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Current Courses -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Current Courses</h2>
+                        <div class="space-y-4">
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-2xl">🧮</div>
+                                        <div>
+                                            <h3 class="font-semibold">Advanced Math Quest</h3>
+                                            <p class="text-sm text-gray-400">Chapter 7: Calculus Fundamentals</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-green-400 font-semibold">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-2xl">💻</div>
+                                        <div>
+                                            <h3 class="font-semibold">JavaScript Mastery</h3>
+                                            <p class="text-sm text-gray-400">Module 4: Async Programming</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-yellow-400 font-semibold">62%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full" style="width: 62%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-900 rounded-lg p-4 border border-gray-600">
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="text-2xl">🌍</div>
+                                        <div>
+                                            <h3 class="font-semibold">World History Explorer</h3>
+                                            <p class="text-sm text-gray-400">Era 3: Medieval Times</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-blue-400 font-semibold">43%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style="width: 43%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Statistics -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Learning Statistics</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="text-center p-4 bg-gray-900 rounded-lg">
+                                <div class="text-2xl mb-2">📚</div>
+                                <div class="text-xl font-bold text-purple-400">127</div>
+                                <div class="text-sm text-gray-400">Lessons Completed</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-900 rounded-lg">
+                                <div class="text-2xl mb-2">⏱️</div>
+                                <div class="text-xl font-bold text-blue-400">48h</div>
+                                <div class="text-sm text-gray-400">Study Time</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-900 rounded-lg">
+                                <div class="text-2xl mb-2">🔥</div>
+                                <div class="text-xl font-bold text-orange-400">23</div>
+                                <div class="text-sm text-gray-400">Day Streak</div>
+                            </div>
+                            <div class="text-center p-4 bg-gray-900 rounded-lg">
+                                <div class="text-2xl mb-2">🎯</div>
+                                <div class="text-xl font-bold text-green-400">94%</div>
+                                <div class="text-sm text-gray-400">Avg Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Recent Activity</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4 p-3 bg-gray-900 rounded-lg">
+                                <div class="text-2xl">🏆</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold">Earned "Math Wizard" badge</p>
+                                    <p class="text-sm text-gray-400">Completed 50 math problems in a row</p>
+                                </div>
+                                <span class="text-xs text-gray-500">2 hours ago</span>
+                            </div>
+                            <div class="flex items-center gap-4 p-3 bg-gray-900 rounded-lg">
+                                <div class="text-2xl">📈</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold">Leveled up to Level 15</p>
+                                    <p class="text-sm text-gray-400">Gained 500 XP from quiz completion</p>
+                                </div>
+                                <span class="text-xs text-gray-500">1 day ago</span>
+                            </div>
+                            <div class="flex items-center gap-4 p-3 bg-gray-900 rounded-lg">
+                                <div class="text-2xl">✅</div>
+                                <div class="flex-1">
+                                    <p class="font-semibold">Completed "Calculus Basics" chapter</p>
+                                    <p class="text-sm text-gray-400">Perfect score on final assessment</p>
+                                </div>
+                                <span class="text-xs text-gray-500">2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Badges & Achievements -->
+                <div class="space-y-8">
+                    <!-- Achievement Badges -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Achievement Badges</h2>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="text-center p-3 bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/30">
+                                <div class="text-3xl mb-2">🏆</div>
+                                <div class="text-xs font-semibold text-yellow-400">Math Wizard</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg border border-blue-500/30">
+                                <div class="text-3xl mb-2">💻</div>
+                                <div class="text-xs font-semibold text-blue-400">Code Master</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-lg border border-green-500/30">
+                                <div class="text-3xl mb-2">🌟</div>
+                                <div class="text-xs font-semibold text-green-400">Quick Learner</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg border border-purple-500/30">
+                                <div class="text-3xl mb-2">🔥</div>
+                                <div class="text-xs font-semibold text-purple-400">Streak Master</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-lg border border-red-500/30">
+                                <div class="text-3xl mb-2">🎯</div>
+                                <div class="text-xs font-semibold text-red-400">Perfect Score</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-lg border border-indigo-500/30">
+                                <div class="text-3xl mb-2">📚</div>
+                                <div class="text-xs font-semibold text-indigo-400">Bookworm</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-teal-500/20 to-green-500/20 rounded-lg border border-teal-500/30">
+                                <div class="text-3xl mb-2">🌍</div>
+                                <div class="text-xs font-semibold text-teal-400">Explorer</div>
+                            </div>
+                            <div class="text-center p-3 bg-gradient-to-br from-pink-500/20 to-rose-500/20 rounded-lg border border-pink-500/30">
+                                <div class="text-3xl mb-2">⚡</div>
+                                <div class="text-xs font-semibold text-pink-400">Speed Demon</div>
+                            </div>
+                            <div class="text-center p-3 bg-gray-700/50 rounded-lg border border-gray-600 opacity-50">
+                                <div class="text-3xl mb-2">🔒</div>
+                                <div class="text-xs font-semibold text-gray-500">Locked</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Position -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Leaderboard</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg border border-yellow-500/30">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🥇</span>
+                                    <div>
+                                        <div class="font-semibold">Alex Chen</div>
+                                        <div class="text-sm text-gray-400">15,890 XP</div>
+                                    </div>
+                                </div>
+                                <span class="text-yellow-400 font-bold">#1</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gradient-to-r from-gray-400/20 to-gray-500/20 rounded-lg border border-gray-400/30">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🥈</span>
+                                    <div>
+                                        <div class="font-semibold">Sarah Kim</div>
+                                        <div class="text-sm text-gray-400">14,230 XP</div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-400 font-bold">#2</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-lg border border-orange-600/30">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🥉</span>
+                                    <div>
+                                        <div class="font-semibold">Mike Johnson</div>
+                                        <div class="text-sm text-gray-400">13,750 XP</div>
+                                    </div>
+                                </div>
+                                <span class="text-orange-400 font-bold">#3</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-lg border border-purple-500/30">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🎓</span>
+                                    <div>
+                                        <div class="font-semibold text-purple-400" id="leaderboardUsername">You</div>
+                                        <div class="text-sm text-gray-400">12,450 XP</div>
+                                    </div>
+                                </div>
+                                <span class="text-purple-400 font-bold">#7</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Goals & Targets -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                        <h2 class="text-2xl font-gaming font-bold mb-6">Weekly Goals</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm">Complete 5 lessons</span>
+                                    <span class="text-sm text-green-400">4/5</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm">Study 10 hours</span>
+                                    <span class="text-sm text-blue-400">7.5/10h</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm">Earn 1000 XP</span>
+                                    <span class="text-sm text-purple-400">650/1000</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-gaming font-bold text-indigo-400 mb-4">EduVerse</div>
+                    <p class="text-gray-400">The ultimate destination for interactive learning. Transform education through gamification.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Subjects</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Mathematics</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Science</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Programming</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Languages</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Community</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Study Groups</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Forums</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Study Buddies</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Achievements</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Bug Reports</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 EduVerse. All rights reserved. Ready to level up your learning?</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Profile page functionality
+        function showProfilePage() {
+            document.getElementById('mainWebsite').classList.add('hidden');
+            document.getElementById('profilePage').classList.remove('hidden');
+            
+            // Update profile username displays
+            const username = localStorage.getItem('eduVerseUser') || 'Learning Champion';
+            document.getElementById('profileUsername').textContent = username;
+            document.getElementById('leaderboardUsername').textContent = username;
+        }
+
+        function showMainWebsite() {
+            document.getElementById('profilePage').classList.add('hidden');
+            document.getElementById('mainWebsite').classList.remove('hidden');
+        }
+
+        // Profile button event listeners
+        document.getElementById('profileBtn').addEventListener('click', showProfilePage);
+        document.getElementById('profileBtnMobile').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.add('hidden');
+            showProfilePage();
+        });
+
+        // Navigation back to main website from profile
+        document.addEventListener('click', function(e) {
+            if (e.target.textContent === 'EduVerse' || e.target.closest('a[href="#home"]')) {
+                showMainWebsite();
+            }
+        });
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                // Store username for display
+                localStorage.setItem('eduVerseUser', username);
+                
+                // Add fade out animation to login page
+                document.getElementById('loginPage').classList.add('fade-out');
+                
+                // Show main website after animation
+                setTimeout(() => {
+                    document.getElementById('loginPage').classList.add('hidden');
+                    document.getElementById('mainWebsite').classList.remove('hidden');
+                    document.getElementById('mainWebsite').classList.add('slide-up');
+                    
+                    // Update user display for both desktop and mobile
+                    document.getElementById('userDisplay').textContent = username;
+                    document.getElementById('userDisplayMobile').textContent = username;
+                }, 500);
+            }
+        });
+
+        // Social login buttons
+        document.querySelectorAll('#loginPage button').forEach(button => {
+            if (button.type !== 'submit') {
+                button.addEventListener('click', function() {
+                    // Store default username for social login
+                    const socialPlatform = this.textContent.trim();
+                    localStorage.setItem('eduVerseUser', socialPlatform + ' User');
+                    
+                    // Simulate social login
+                    document.getElementById('loginPage').classList.add('fade-out');
+                    setTimeout(() => {
+                        document.getElementById('loginPage').classList.add('hidden');
+                        document.getElementById('mainWebsite').classList.remove('hidden');
+                        document.getElementById('mainWebsite').classList.add('slide-up');
+                        
+                        // Update user display for both desktop and mobile
+                        document.getElementById('userDisplay').textContent = socialPlatform + ' User';
+                        document.getElementById('userDisplayMobile').textContent = socialPlatform + ' User';
+                    }, 500);
+                });
+            }
+        });
+
+        // Logout functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.textContent === 'Logout') {
+                localStorage.removeItem('eduVerseUser');
+                location.reload();
+            }
+        });
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-gray-900');
+                nav.classList.remove('bg-gray-900/95');
+            } else {
+                nav.classList.add('bg-gray-900/95');
+                nav.classList.remove('bg-gray-900');
+            }
+        });
+
+        // Interactive button effects
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Subject filtering functionality
+        document.querySelectorAll('.subject-filter').forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedSubject = this.getAttribute('data-subject');
+                
+                // Update active button
+                document.querySelectorAll('.subject-filter').forEach(btn => {
+                    btn.classList.remove('active', 'bg-gradient-to-r', 'from-indigo-600', 'to-purple-600');
+                    btn.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                });
+                
+                this.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                this.classList.add('active', 'bg-gradient-to-r', 'from-indigo-600', 'to-purple-600');
+                
+                // Filter courses
+                const courseCards = document.querySelectorAll('.course-card');
+                courseCards.forEach(card => {
+                    if (selectedSubject === 'all' || card.getAttribute('data-subject') === selectedSubject) {
+                        card.style.display = 'block';
+                        card.style.animation = 'slideUp 0.5s ease-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            button { position: relative; overflow: hidden; }
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f94118a3474007',t:'MTc1Nzk1MTE1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
